@@ -6,13 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class QuestionController extends AbstractController{
     /**
-     * @Route("/")
+     * @Route("/",name="app_homepage")
      */
     public function homepage(){
-        return new Response('What a bewitching controller we have conjured!');
+        return $this->render('question/homepage.html.twig');
     }
     /**
-     * @Route("/questions/{slug}")
+     * @Route("/questions/{slug}",name="app_question_show")
      */
 
     public function show($slug){
@@ -21,6 +21,7 @@ class QuestionController extends AbstractController{
             'Honestly, I like furry shoes better than MY cat',
             'Maybe... try saying the spell backwards?',
         ];
+        dump($slug,$this);
 
         return $this->render('question/show.html.twig',[
             'question' =>  ucwords(str_replace('-',' ',$slug)),
